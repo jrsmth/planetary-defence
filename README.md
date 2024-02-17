@@ -4,22 +4,22 @@
 
 <p align="center">
   <a href="">
-    <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white">
+    <img src="https://img.shields.io/badge/html5-%23E34F26.svg?&logo=html5&logoColor=white">
   </a>
   <a href="">
-    <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
+    <img src="https://img.shields.io/badge/javascript-%23323330.svg?logo=javascript&logoColor=%23F7DF1E">
   </a>
   <a href="">
-    <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" >
+    <img src="https://img.shields.io/badge/css3-%231572B6.svg?logo=css3&logoColor=white" >
   </a>
   <a href="">
-    <img src="https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white" >
+    <img src="https://img.shields.io/badge/github%20actions-%232671E5.svg?&logo=githubactions&logoColor=white" >
   </a>
   <a href="">
-    <img src="https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white">
+    <img src="https://img.shields.io/badge/github%20pages-121013?&logo=github&logoColor=white">
   </a> 
   <a href="">
-    <img src="https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=orange" >
+    <img src="https://img.shields.io/badge/markdown-%23000000.svg?&logo=markdown&logoColor=orange" >
   </a>
 </p>
 
