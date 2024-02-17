@@ -7,10 +7,13 @@
     <img src="https://img.shields.io/badge/html5-%23E34F26.svg?&logo=html5&logoColor=white">
   </a>
   <a href="">
+    <img src="https://img.shields.io/badge/css3-%231572B6.svg?logo=css3&logoColor=white" >
+  </a>
+  <a href="">
     <img src="https://img.shields.io/badge/javascript-%23323330.svg?logo=javascript&logoColor=%23F7DF1E">
   </a>
   <a href="">
-    <img src="https://img.shields.io/badge/css3-%231572B6.svg?logo=css3&logoColor=white" >
+    <img src="https://img.shields.io/badge/node.js-6DA55F?logo=node.js&logoColor=white" >
   </a>
   <a href="">
     <img src="https://img.shields.io/badge/github%20actions-%232671E5.svg?&logo=githubactions&logoColor=white" >

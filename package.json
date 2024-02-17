@@ -1,0 +1,19 @@
+{
+  "name": "planetary-defence",
+  "version": "0.0.0",
+  "description": "Planetary Defence Game 🌍💥🕹",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrsmth/planetary-defence.git"
+  },
+  "author": "Jrsmth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrsmth/planetary-defence/issues"
+  },
+  "homepage": "https://github.com/jrsmth/planetary-defence#readme"
+}
