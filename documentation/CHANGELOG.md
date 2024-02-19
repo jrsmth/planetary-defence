@@ -14,5 +14,5 @@
 - `#4` Add movement to Asteroids
 - `#5` Add GitHub Action for versioning
 
-[0.0.0]: https://github.com/jrsmth/ultima/releases/tag/0.0.0
-[0.1.0]: https://github.com/jrsmth/ultima/compare/0.0.0...0.1.0
+[0.0.0]: https://github.com/jrsmth/planetary-defence/releases/tag/0.0.0
+[0.1.0]: https://github.com/jrsmth/planetary-defence/compare/0.0.0...0.1.0
