@@ -34,10 +34,9 @@ jobs:
       - name: Add -SNAPSHOT 📷
         run: |
           npm version ${{ env.MAJOR }}.${{ env.MINOR }}.$((${{ env.INCREMENTAL }} + 1))-SNAPSHOT
-          echo "$(cat package.json | jq -r '.version')"
-
-      - name: Commit -SNAPSHOT 💾
-        uses: stefanzweifel/git-auto-commit-action@v4
+          git add .
+          git commit -m "[release] Bumped to next snapshot version"
+          git push
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
