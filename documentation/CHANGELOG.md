@@ -7,7 +7,7 @@
 <!-- @LatestFirst -->
 
 ## [0.0.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.0.0)
-[PDEF POC](https://github.com/jrsmth/planetary-defence/milestone/1) (??/??/????)
+[PDEF POC](https://github.com/jrsmth/planetary-defence/milestone/1) (19/02/2024)
 - `#1` Create README & CHANGELOG
 - `#2` Deploy to GitHub Pages
 - `#3` Create base objects (Asteroid, Earth, Cannon)
