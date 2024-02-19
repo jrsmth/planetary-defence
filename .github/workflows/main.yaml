@@ -29,7 +29,6 @@ jobs:
           tag_name: ${{ env.VERSION }}
 
       - name: Add -SNAPSHOT 📷
-        working-directory: ./app
         run: |
           npm version patch --git-tag-version false
           npm version $(cat package.json | jq -r '.version')-SNAPSHOT
