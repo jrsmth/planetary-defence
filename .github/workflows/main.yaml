@@ -35,6 +35,7 @@ jobs:
       - name: Add -SNAPSHOT 📷
         run: |
           npm version ${{ env.SNAPSHOT_VERSION }}-SNAPSHOT
+          git stash pop
 
       - name: Commit -SNAPSHOT 💾
         uses: stefanzweifel/git-auto-commit-action@v4
