@@ -33,7 +33,7 @@ jobs:
 
       - name: Add -SNAPSHOT 📷
         run: |
-          jq '.version="${{ env.MAJOR }}.${{ env.MINOR }}.$((${{ env.INCREMENTAL }} + 1))-SNAPSHOT"' package.json > /tmp/package.json
+          jq '.version="${{ env.MAJOR }}.${{ env.MINOR }}.[[1 | ${{ env.INCREMENTAL }} | tonumber] | add]-SNAPSHOT"' package.json > /tmp/package.json
           mv /tmp/package.json package.json
 
       - name: Commit -SNAPSHOT 💾
