@@ -30,7 +30,7 @@ jobs:
 
       - name: Add -SNAPSHOT 📷
         run: |
-          npm version patch --no-git-tag-version
+          npm version patch --git-tag-version false
           npm version $(cat package.json | jq -r '.version')-SNAPSHOT
 
       - name: Commit -SNAPSHOT 💾
