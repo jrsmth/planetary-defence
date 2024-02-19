@@ -1,6 +1,6 @@
 {
   "name": "planetary-defence",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "0.1.0",
   "description": "Planetary Defence Game 🌍💥🕹",
   "main": "index.js",
   "scripts": {
