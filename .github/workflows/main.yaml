@@ -34,6 +34,7 @@ jobs:
       - name: Add -SNAPSHOT 📷
         run: |
           npm version ${{ env.MAJOR }}.${{ env.MINOR }}.$((${{ env.INCREMENTAL }} + 1))-SNAPSHOT
+          echo "$(cat package.json | jq -r '.version')"
 
       - name: Commit -SNAPSHOT 💾
         uses: stefanzweifel/git-auto-commit-action@v4
