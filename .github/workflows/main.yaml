@@ -30,6 +30,7 @@ jobs:
 
       - name: Add -SNAPSHOT 📷
         run: |
+          git stash
           npm version patch --git-tag-version false --force
           npm version $(cat package.json | jq -r '.version')-SNAPSHOT
 
