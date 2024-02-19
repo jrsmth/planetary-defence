@@ -16,7 +16,6 @@ jobs:
         uses: fregante/setup-git-user@v2
 
       - name: Bump and Tag 🏷️
-        working-directory: ./app
         run: |
           npm version patch
           git tag "$(cat package.json | jq -r '.version')" -m "[release] planetary-defence-$(cat package.json | jq -r '.version')"
