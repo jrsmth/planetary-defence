@@ -31,9 +31,7 @@ jobs:
       - name: Add -SNAPSHOT 📷
         run: |
           npm version patch --no-git-tag-version
-          git stash 
           npm version $(cat package.json | jq -r '.version')-SNAPSHOT
-          git stash pop
 
       - name: Commit -SNAPSHOT 💾
         uses: stefanzweifel/git-auto-commit-action@v4
