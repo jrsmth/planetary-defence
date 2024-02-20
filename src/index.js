@@ -3,7 +3,8 @@ window.addEventListener('DOMContentLoaded', game);
 
 const constants = {
     src: {
-        earth: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png"
+        earth: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
+        explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png"
     }
 }
 
@@ -16,6 +17,9 @@ function game() {
 
     const sprite = new Image();
     sprite.src = constants.src.earth;
+
+    const spriteExplosion = new Image();
+    spriteExplosion.src = constants.src.explosion;
 
     let asteroids = [];
     let bullets = [];
@@ -111,7 +115,7 @@ function game() {
                     canvas.addEventListener('mousemove', action);
                 }
             } else if (!asteroids[i].extinct) {
-                // explosion(asteroids[i]); // TODO
+                explode(asteroids[i]);
             }
         }
 
@@ -160,6 +164,103 @@ function game() {
         if (bullets.length - destroyed && playing) fire();
     }
 
+    function action(e) {
+        e.preventDefault();
+
+        if (playing) {
+            bullets.push(new Bullet(e, height, width));
+
+        } else {
+            const w = width * .5, h = height * .5;
+            const x = e.offsetX, y = e.offsetY;
+            let distance;
+
+            if (gameOver) {
+                distance = Math.sqrt(((x - w) * (x - w)) + ((y - (h + 45 + 22)) * (y - (h + 45 + 22))));
+
+                if (distance < 27) {
+                    if (e.type === 'click') {
+                        gameOver   = false;
+                        count      = 0;
+                        bullets    = [];
+                        asteroids  = [];
+                        explosions = [];
+                        destroyed  = 0;
+                        player.deg = 0;
+                        canvas.removeEventListener('contextmenu', action);
+                        canvas.removeEventListener('mousemove', move);
+                        canvas.style.cursor = "default";
+                    } else {
+                        canvas.style.cursor = "pointer";
+                    }
+                } else {
+                    canvas.style.cursor = "default";
+                }
+            } else {
+                distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
+
+                if (distance < 27) {
+                    if (e.type === 'click') {
+                        playing = true;
+                        canvas.removeEventListener("mousemove", action);
+                        canvas.addEventListener('contextmenu', action);
+                        canvas.addEventListener('mousemove', move);
+                        canvas.setAttribute("class", "playing");
+                        canvas.style.cursor = "default";
+                    } else {
+                        canvas.style.cursor = "pointer";
+                    }
+                } else {
+                    canvas.style.cursor = "default";
+                }
+            }
+        }
+    }
+
+    function explode(asteroid) {
+        context.save();
+        context.translate(asteroid.realX, asteroid.realY);
+        context.rotate(asteroid.deg);
+
+        let spriteY;
+        let spriteX = 256;
+        if (asteroid.state === 0) {
+            spriteY = 0;
+            spriteX = 0;
+        } else if (asteroid.state < 8) {
+            spriteY = 0;
+        } else if (asteroid.state < 16) {
+            spriteY = 256;
+        } else if (asteroid.state < 24) {
+            spriteY = 512;
+        } else {
+            spriteY = 768;
+        }
+
+        if (asteroid.state === 8 || asteroid.state === 16 || asteroid.state === 24) {
+            asteroid.stateX = 0;
+        }
+
+        context.drawImage(
+            spriteExplosion,
+            asteroid.stateX += spriteX,
+            spriteY,
+            256,
+            256,
+            -(asteroid.width / asteroid.size) * .5,
+            -(asteroid.height / asteroid.size) * .5,
+            asteroid.width / asteroid.size,
+            asteroid.height / asteroid.size
+        );
+        asteroid.state += 1;
+
+        if (asteroid.state === 31) {
+            asteroid.extinct = true;
+        }
+
+        context.restore();
+    }
+
     function fire() {
         let distance;
 
@@ -201,59 +302,6 @@ function game() {
                             explosions.push(asteroids[j]);
                         }
                     }
-                }
-            }
-        }
-    }
-
-    function action(e) {
-        e.preventDefault();
-
-        if (playing) {
-            bullets.push(new Bullet(e, width, height));
-
-        } else {
-            const w = width * .5, h = height * .5;
-            const x = e.offsetX, y = e.offsetY;
-            let distance;
-
-            if (gameOver) {
-                distance = Math.sqrt(((x - w) * (x - w)) + ((y - (h + 45 + 22)) * (y - (h+ 45 + 22))));
-
-                if (distance < 27) {
-                    if (e.type === 'click') {
-                        gameOver   = false;
-                        count      = 0;
-                        bullets    = [];
-                        asteroids  = [];
-                        explosions = [];
-                        destroyed  = 0;
-                        player.deg = 0;
-                        canvas.removeEventListener('contextmenu', action);
-                        canvas.removeEventListener('mousemove', move);
-                        canvas.style.cursor = "default";
-                    } else {
-                        canvas.style.cursor = "pointer";
-                    }
-                } else {
-                    canvas.style.cursor = "default";
-                }
-            } else {
-                distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
-
-                if (distance < 27) {
-                    if (e.type === 'click') {
-                        playing = true;
-                        canvas.removeEventListener("mousemove", action);
-                        canvas.addEventListener('contextmenu', action);
-                        canvas.addEventListener('mousemove', move);
-                        canvas.setAttribute("class", "playing");
-                        canvas.style.cursor = "default";
-                    } else {
-                        canvas.style.cursor = "pointer";
-                    }
-                } else {
-                    canvas.style.cursor = "default";
                 }
             }
         }
@@ -320,22 +368,22 @@ class Bullet {
     event = {};
     height = 0;
     width = 0;
+    realX = 0;
+    realY = 0;
+    deg = 0;
 
     x = -8;
     y = -179;
-    sizeX = 2;
-    sizeY = 10;
-    realX = this.event.offsetX;
-    realY = this.event.offsetY;
-    dirX  = this.event.offsetX;
-    dirY  = this.event.offsetY;
-    deg   = Math.atan2(this.event.offsetX - (this.width * .5), - (this.event.offsetY - (this.height * .5)));
     destroyed= false;
 
     constructor(event, height, width) {
         this.event = event;
         this.height = height;
         this.width = width;
+
+        this.realX = event.offsetX;
+        this.realY = event.offsetY;
+        this.deg = Math.atan2(event.offsetX - (width * .5), -(event.offsetY - (height * .5)));
     }
 }
 
