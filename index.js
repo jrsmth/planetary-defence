@@ -73,8 +73,34 @@ function game() {
             } else {
                 context.drawImage(sprite, 428, 12, 70, 70, width * .5 - 35, height * .5 - 35, 70,70);
             }
+        
+        } else if (count < 1) {
+            count = 1;
+            context.fillStyle = 'rgba(0,0,0,0.75)';
+            context.rect(0,0, width, height);
+            context.fill();
+
+            context.font = "60px Verdana";
+            context.fillStyle = "white";
+            context.textAlign = "center";
+            context.fillText("GAME OVER",width * .5,height * .5 - 150);
+
+            context.font = "20px Verdana";
+            context.fillStyle = "white";
+            context.textAlign = "center";
+            context.fillText("Total destroyed: "+ destroyed, width * .5,height * .5 + 140);
+
+            record = destroyed > record ? destroyed : record;
+
+            context.font = "20px Verdana";
+            context.fillStyle = "white";
+            context.textAlign = "center";
+            context.fillText("RECORD: "+ record, width * .5,height * .5 + 185);
+
+            context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5 + 40, 70,70);
+
+            canvas.removeAttribute('class');
         }
-        // TODO
     }
     
     function initAsteroids() {
