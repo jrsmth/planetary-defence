@@ -4,9 +4,14 @@
 - `0.0.x` PDEF POC
 - `0.1.x` Collision
 - `0.2.x` End Game
+- `0.3.x` Global Scores
 
 # Releases
 <!-- @LatestFirst -->
+
+## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.3.0)
+[Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (??/??/????)
+- `#10` ...
 
 ## [0.2.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.2.0)
 [End Game](https://github.com/jrsmth/planetary-defence/milestone/3) (20/02/2024)
@@ -29,3 +34,4 @@
 [0.0.0]: https://github.com/jrsmth/planetary-defence/releases/tag/0.0.0
 [0.1.0]: https://github.com/jrsmth/planetary-defence/compare/0.0.0...0.1.0
 [0.2.0]: https://github.com/jrsmth/planetary-defence/compare/0.1.0...0.2.0
+[0.3.0]: https://github.com/jrsmth/planetary-defence/compare/0.2.0...0.3.0
