@@ -2,10 +2,15 @@
 
 # Version History
 - `0.0.x` PDEF POC
-- `0.1.x` ???
+- `0.1.x` Collision
+- `0.2.x` End Game
 
 # Releases
 <!-- @LatestFirst -->
+
+## [0.2.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.2.0)
+[End Game](https://github.com/jrsmth/planetary-defence/milestone/3) (20/02/2024)
+- `#9` Implement 'End Game' screen with basic high score
 
 ## [0.1.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.1.0)
 [Collision](https://github.com/jrsmth/planetary-defence/milestone/2) (20/02/2024)
@@ -23,3 +28,4 @@
 
 [0.0.0]: https://github.com/jrsmth/planetary-defence/releases/tag/0.0.0
 [0.1.0]: https://github.com/jrsmth/planetary-defence/compare/0.0.0...0.1.0
+[0.2.0]: https://github.com/jrsmth/planetary-defence/compare/0.1.0...0.2.0
