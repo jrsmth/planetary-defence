@@ -8,8 +8,10 @@
 <!-- @LatestFirst -->
 
 ## [0.1.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.1.0)
-[???](https://github.com/jrsmth/planetary-defence/milestone/2) (??/??/??)
-- This & that
+[Collision](https://github.com/jrsmth/planetary-defence/milestone/2) (20/02/2024)
+- `#6` Giver player ability to aim
+- `#7` Add collision detection between asteroids and laser
+- `#8` Increase score when asteroids are destroyed
 
 ## [0.0.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.0.0)
 [PDEF POC](https://github.com/jrsmth/planetary-defence/milestone/1) (19/02/2024)
