@@ -24,6 +24,9 @@
   <a href="">
     <img src="https://img.shields.io/badge/markdown-%23000000.svg?&logo=markdown&logoColor=orange" >
   </a>
+  <a href="">
+    <img src="https://img.shields.io/badge/firebase-ffca28?&logo=firebase&logoColor=black" >
+  </a>
 </p>
 
 <h1 align="center">Planetary Defence</h1>
