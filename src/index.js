@@ -2,6 +2,10 @@
 window.addEventListener('DOMContentLoaded', game);
 
 const constants = {
+    api: {
+        adjective: "https://random-word-form.herokuapp.com/random/adjective",
+        noun: "https://random-word-form.herokuapp.com/random/noun"
+    },
     src: {
         earth: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
         explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png"
@@ -9,11 +13,12 @@ const constants = {
 }
 
 function game() {
-    
-    const player = new Player();
+
+    let player = new Player();
 
     const canvas = document.getElementsByTagName('canvas')[0];
     const context = canvas.getContext('2d');
+    const scores = db.collection("scores");
 
     const sprite = new Image();
     sprite.src = constants.src.earth;
@@ -30,6 +35,7 @@ function game() {
     let planet_deg= 0;
     let gameOver = false;
     let playing = false;
+    let firstLoad = true;
     let destroyed = 0;
     let record = 0;
     let count = 0;
@@ -40,10 +46,14 @@ function game() {
 
     init();
 
-    function init() {
+    async function init() {
         window.requestAnimationFrame(init);
 
-        if (!gameOver) {
+        if (firstLoad) {
+            firstLoad = false;
+            player.name = await generateName();
+
+        } else if (!gameOver) {
             // Clear canvas
             context.clearRect(0, 0, width, height);
             context.beginPath();
@@ -51,7 +61,7 @@ function game() {
             // Init player
             initPlanet();
             initPlayer();
-            
+
             // Init opposition
             if (playing) {
                 initAsteroids();
@@ -73,8 +83,9 @@ function game() {
             } else {
                 context.drawImage(sprite, 428, 12, 70, 70, width * .5 - 35, height * .5 - 35, 70,70);
             }
-        
+
         } else if (count < 1) {
+            // Game Over
             count = 1;
             context.fillStyle = 'rgba(0,0,0,0.75)';
             context.rect(0,0, width, height);
@@ -83,12 +94,12 @@ function game() {
             context.font = "60px Verdana";
             context.fillStyle = "white";
             context.textAlign = "center";
-            context.fillText("GAME OVER",width * .5,height * .5 - 150);
+            context.fillText(`GAME OVER: ${player.name}`,width * .5,height * .5 - 150);
 
             context.font = "20px Verdana";
             context.fillStyle = "white";
             context.textAlign = "center";
-            context.fillText("Total destroyed: "+ destroyed, width * .5,height * .5 + 140);
+            context.fillText(`Total destroyed: ${destroyed}`, width * .5,height * .5 + 140);
 
             record = destroyed > record ? destroyed : record;
 
@@ -100,6 +111,8 @@ function game() {
             context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5 + 40, 70,70);
 
             canvas.removeAttribute('class');
+
+            await submit(record, player.name);
         }
     }
     
@@ -216,6 +229,7 @@ function game() {
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
                         canvas.style.cursor = "default";
+
                     } else {
                         canvas.style.cursor = "pointer";
                     }
@@ -337,6 +351,15 @@ function game() {
         player.deg = Math.atan2(e.offsetX - (width * .5), -(e.offsetY - (height * .5)));
     }
 
+    async function submit(score, name) {
+        try {
+            const docRef = await scores.add({name: name, score: score, timestamp: Date.now()});
+            console.log('Score added with ID: ', docRef.id);
+        } catch (error) {
+            console.error('Error submitting score: ', error)
+        }
+    }
+
     function update() {
         height = context.canvas.height = window.innerHeight;
         width = context.canvas.width  = window.innerWidth;
@@ -419,9 +442,34 @@ class Player {
     width = 70;
     height= 79;
     deg   = 0;
+    name = "Unknown"
+
+    constructor(name) {
+        this.name = name;
+    }
 }
 
 // Utils
 function random(from, to) {
     return Math.floor(Math.random() * (to - from + 1)) + from;
+}
+
+function capitalise(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+async function generateName() {
+    const noun = await fetch(constants.api.adjective).then(
+        res => res.json().then(data => {
+            return capitalise(data[0]);
+        })
+    );
+
+    const adjective = await fetch(constants.api.noun).then(
+        res => res.json().then(data => {
+            return capitalise(data[0]);
+        })
+    );
+
+    return noun + adjective;
 }
