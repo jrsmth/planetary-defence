@@ -10,12 +10,16 @@
 <!-- @LatestFirst -->
 
 ## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.3.0)
-[Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (??/??/????)
-- `#10` ...
+[Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (22/02/2024)
+- `#11` Create Firebase storage for global scoring
+- `#12` Generate a player name
+- `#13` Submit player score to Firebase when game is complete
+- `#14` Retrieve and display top ten high scores when game is over
+- `#15` Externalise firebase config
 
 ## [0.2.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.2.0)
 [End Game](https://github.com/jrsmth/planetary-defence/milestone/3) (20/02/2024)
-- `#9` Implement 'End Game' screen with basic high score
+- `#10` Implement 'End Game' screen with basic high score
 
 ## [0.1.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.1.0)
 [Collision](https://github.com/jrsmth/planetary-defence/milestone/2) (20/02/2024)
