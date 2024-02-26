@@ -5,9 +5,15 @@
 - `0.1.x` Collision
 - `0.2.x` End Game
 - `0.3.x` Global Scores
+- `0.4.x` Styling
+- `0.5.x` Demo
 
 # Releases
 <!-- @LatestFirst -->
+
+## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.4.0)
+[Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (??/??/????)
+- `#...`
 
 ## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.3.0)
 [Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (26/02/2024)
@@ -39,3 +45,4 @@
 [0.1.0]: https://github.com/jrsmth/planetary-defence/compare/0.0.0...0.1.0
 [0.2.0]: https://github.com/jrsmth/planetary-defence/compare/0.1.0...0.2.0
 [0.3.0]: https://github.com/jrsmth/planetary-defence/compare/0.2.0...0.3.0
+[0.3.0]: https://github.com/jrsmth/planetary-defence/compare/0.3.0...0.4.0
