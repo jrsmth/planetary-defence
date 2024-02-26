@@ -36,8 +36,7 @@ function game() {
     let gameOver = false;
     let playing = false;
     let firstLoad = true;
-    let destroyed = 0;
-    let record = 0;
+    let score = 0;
     let count = 0;
 
     canvas.addEventListener('click', action);
@@ -70,15 +69,15 @@ function game() {
                 context.fillStyle = "white";
                 context.textBaseline = 'middle';
                 context.textAlign = "left";
-                context.fillText('Record: ' + record + '', 20, 30);
+                context.fillText('Score: ' + score + '', 20, 30);
 
                 context.font = "40px Verdana";
                 context.fillStyle = "white";
                 context.strokeStyle = "black";
                 context.textAlign = "center";
                 context.textBaseline = 'middle';
-                context.strokeText('' + destroyed + '', width * .5, height * .5);
-                context.fillText('' + destroyed + '', width * .5, height * .5);
+                context.strokeText('' + score + '', width * .5, height * .5);
+                context.fillText('' + score + '', width * .5, height * .5);
 
             } else {
                 context.drawImage(sprite, 428, 12, 70, 70, width * .5 - 35, height * .5 - 35, 70,70);
@@ -99,20 +98,20 @@ function game() {
             context.font = "20px Verdana";
             context.fillStyle = "white";
             context.textAlign = "center";
-            context.fillText(`Total destroyed: ${destroyed}`, width * .5,height * .5 + 140);
-
-            record = destroyed > record ? destroyed : record;
-
-            context.font = "20px Verdana";
-            context.fillStyle = "white";
-            context.textAlign = "center";
-            context.fillText("RECORD: "+ record, width * .5,height * .5 + 185);
+            context.fillText(`Score: ${score}`, width * .5,height * .5 + 140);
 
             context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5 + 40, 70,70);
 
             canvas.removeAttribute('class');
 
-            await submit(record, player.name);
+            await submit(score, player.name);
+
+            const scores = await topScores();
+
+            for (let i = 0; i < scores.length; i++) {
+                context.fillText('#' + i + 1 + ': ' + scores[i].score,width * .5,height * .5 + 220 + (i * 20));
+                context.fillText('#' + i + 1 + ': ' + scores[i].score,width * .5,height * .5 + 220 + (i * 20));
+            }
         }
     }
     
@@ -158,7 +157,7 @@ function game() {
             }
         }
 
-        if (asteroids.length - destroyed < 10 + (Math.floor(destroyed / 6))) {
+        if (asteroids.length - score < 10 + (Math.floor(score / 6))) {
             asteroids.push(new Asteroid(width, height));
         }
     }
@@ -200,7 +199,7 @@ function game() {
 
         context.restore();
 
-        if (bullets.length - destroyed && playing) fire();
+        if (bullets.length - score && playing) fire();
     }
 
     function action(e) {
@@ -224,7 +223,7 @@ function game() {
                         bullets    = [];
                         asteroids  = [];
                         explosions = [];
-                        destroyed  = 0;
+                        score  = 0;
                         player.deg = 0;
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
@@ -336,7 +335,7 @@ function game() {
                         distance = Math.sqrt(Math.pow(asteroids[j].realX - bullets[i].realX, 2) + Math.pow(asteroids[j].realY - bullets[i].realY, 2));
 
                         if (distance < (((asteroids[j].width / asteroids[j].size) / 2) - 4) + ((19 / 2) - 4)) {
-                            destroyed += 1;
+                            score += 1;
                             asteroids[j].destroyed = true;
                             bullets[i].destroyed   = true;
                             explosions.push(asteroids[j]);
@@ -365,6 +364,17 @@ function game() {
         }).catch(err => {
             console.error(`Error submitting score [${err}]`);
         });
+    }
+
+    async function topScores() {
+        return fetch(constants.api.scores)
+            .then(res => {
+                console.log('Top scores successfully retrieved!');
+                return res.json();
+            }).catch(err => {
+                console.error(`Error submitting score [${err}]`);
+                return [];
+            });
     }
 
     function update() {

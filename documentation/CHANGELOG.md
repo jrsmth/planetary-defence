@@ -10,7 +10,7 @@
 <!-- @LatestFirst -->
 
 ## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.3.0)
-[Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (22/02/2024)
+[Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (26/02/2024)
 - `#11` Create Firebase storage for global scoring
 - `#12` Generate a player name
 - `#13` Submit player score to Firebase when game is complete
