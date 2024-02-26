@@ -5,25 +5,5 @@
     <body>
         <canvas></canvas>
     </body>
-    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
-    <script>
-        let db;
-
-        const firebaseConfig = fetch("./env.json")
-            .then((response) => response.json())
-            .then((data) => {
-                return data;
-            });
-
-        const initApp = async () => {
-            // Initialise Firebase
-            firebase.initializeApp(await firebaseConfig);
-        };
-
-        initApp().then(
-            () => db = firebase.firestore()
-        );
-    </script>
     <script src="./index.js"></script>
 </html>

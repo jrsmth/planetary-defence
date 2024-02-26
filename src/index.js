@@ -4,7 +4,8 @@ window.addEventListener('DOMContentLoaded', game);
 const constants = {
     api: {
         adjective: "https://random-word-form.herokuapp.com/random/adjective",
-        noun: "https://random-word-form.herokuapp.com/random/noun"
+        noun: "https://random-word-form.herokuapp.com/random/noun",
+        scores: "https://planetary-defence-scores.onrender.com/scores"
     },
     src: {
         earth: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
@@ -18,7 +19,6 @@ function game() {
 
     const canvas = document.getElementsByTagName('canvas')[0];
     const context = canvas.getContext('2d');
-    const scores = db.collection("scores");
 
     const sprite = new Image();
     sprite.src = constants.src.earth;
@@ -352,12 +352,19 @@ function game() {
     }
 
     async function submit(score, name) {
-        try {
-            const docRef = await scores.add({name: name, score: score, timestamp: Date.now()});
-            console.log('Score added with ID: ', docRef.id);
-        } catch (error) {
-            console.error('Error submitting score: ', error)
-        }
+        fetch(`${constants.api.scores}/new`, {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: name,
+                score: score,
+                timestamp: Date.now()
+            })
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.error(`Error submitting score [${err}]`);
+        });
     }
 
     function update() {
