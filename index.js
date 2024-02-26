@@ -2,6 +2,11 @@
 window.addEventListener('DOMContentLoaded', game);
 
 const constants = {
+    api: {
+        adjective: "https://random-word-form.herokuapp.com/random/adjective",
+        noun: "https://random-word-form.herokuapp.com/random/noun",
+        scores: "https://planetary-defence-scores.onrender.com/scores"
+    },
     src: {
         earth: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
         explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png"
@@ -9,8 +14,8 @@ const constants = {
 }
 
 function game() {
-    
-    const player = new Player();
+
+    let player = new Player();
 
     const canvas = document.getElementsByTagName('canvas')[0];
     const context = canvas.getContext('2d');
@@ -30,8 +35,8 @@ function game() {
     let planet_deg= 0;
     let gameOver = false;
     let playing = false;
-    let destroyed = 0;
-    let record = 0;
+    let firstLoad = true;
+    let score = 0;
     let count = 0;
 
     canvas.addEventListener('click', action);
@@ -40,10 +45,14 @@ function game() {
 
     init();
 
-    function init() {
+    async function init() {
         window.requestAnimationFrame(init);
 
-        if (!gameOver) {
+        if (firstLoad) {
+            firstLoad = false;
+            player.name = await generateName();
+
+        } else if (!gameOver) {
             // Clear canvas
             context.clearRect(0, 0, width, height);
             context.beginPath();
@@ -51,7 +60,7 @@ function game() {
             // Init player
             initPlanet();
             initPlayer();
-            
+
             // Init opposition
             if (playing) {
                 initAsteroids();
@@ -60,21 +69,22 @@ function game() {
                 context.fillStyle = "white";
                 context.textBaseline = 'middle';
                 context.textAlign = "left";
-                context.fillText('Record: ' + record + '', 20, 30);
+                context.fillText('Score: ' + score + '', 20, 30);
 
                 context.font = "40px Verdana";
                 context.fillStyle = "white";
                 context.strokeStyle = "black";
                 context.textAlign = "center";
                 context.textBaseline = 'middle';
-                context.strokeText('' + destroyed + '', width * .5, height * .5);
-                context.fillText('' + destroyed + '', width * .5, height * .5);
+                context.strokeText('' + score + '', width * .5, height * .5);
+                context.fillText('' + score + '', width * .5, height * .5);
 
             } else {
                 context.drawImage(sprite, 428, 12, 70, 70, width * .5 - 35, height * .5 - 35, 70,70);
             }
-        
+
         } else if (count < 1) {
+            // Game Over
             count = 1;
             context.fillStyle = 'rgba(0,0,0,0.75)';
             context.rect(0,0, width, height);
@@ -83,23 +93,25 @@ function game() {
             context.font = "60px Verdana";
             context.fillStyle = "white";
             context.textAlign = "center";
-            context.fillText("GAME OVER",width * .5,height * .5 - 150);
+            context.fillText(`GAME OVER: ${player.name}`,width * .5,height * .5 - 150);
 
             context.font = "20px Verdana";
             context.fillStyle = "white";
             context.textAlign = "center";
-            context.fillText("Total destroyed: "+ destroyed, width * .5,height * .5 + 140);
-
-            record = destroyed > record ? destroyed : record;
-
-            context.font = "20px Verdana";
-            context.fillStyle = "white";
-            context.textAlign = "center";
-            context.fillText("RECORD: "+ record, width * .5,height * .5 + 185);
+            context.fillText(`Score: ${score}`, width * .5,height * .5 + 140);
 
             context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5 + 40, 70,70);
 
             canvas.removeAttribute('class');
+
+            await submit(score, player.name);
+
+            const scores = await topScores();
+
+            for (let i = 0; i < scores.length; i++) {
+                context.fillText('#' + i + 1 + ': ' + scores[i].score,width * .5,height * .5 + 220 + (i * 20));
+                context.fillText('#' + i + 1 + ': ' + scores[i].score,width * .5,height * .5 + 220 + (i * 20));
+            }
         }
     }
     
@@ -145,7 +157,7 @@ function game() {
             }
         }
 
-        if (asteroids.length - destroyed < 10 + (Math.floor(destroyed / 6))) {
+        if (asteroids.length - score < 10 + (Math.floor(score / 6))) {
             asteroids.push(new Asteroid(width, height));
         }
     }
@@ -187,7 +199,7 @@ function game() {
 
         context.restore();
 
-        if (bullets.length - destroyed && playing) fire();
+        if (bullets.length - score && playing) fire();
     }
 
     function action(e) {
@@ -211,11 +223,12 @@ function game() {
                         bullets    = [];
                         asteroids  = [];
                         explosions = [];
-                        destroyed  = 0;
+                        score  = 0;
                         player.deg = 0;
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
                         canvas.style.cursor = "default";
+
                     } else {
                         canvas.style.cursor = "pointer";
                     }
@@ -322,7 +335,7 @@ function game() {
                         distance = Math.sqrt(Math.pow(asteroids[j].realX - bullets[i].realX, 2) + Math.pow(asteroids[j].realY - bullets[i].realY, 2));
 
                         if (distance < (((asteroids[j].width / asteroids[j].size) / 2) - 4) + ((19 / 2) - 4)) {
-                            destroyed += 1;
+                            score += 1;
                             asteroids[j].destroyed = true;
                             bullets[i].destroyed   = true;
                             explosions.push(asteroids[j]);
@@ -335,6 +348,33 @@ function game() {
 
     function move(e) {
         player.deg = Math.atan2(e.offsetX - (width * .5), -(e.offsetY - (height * .5)));
+    }
+
+    async function submit(score, name) {
+        fetch(`${constants.api.scores}/new`, {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: name,
+                score: score,
+                timestamp: Date.now()
+            })
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.error(`Error submitting score [${err}]`);
+        });
+    }
+
+    async function topScores() {
+        return fetch(constants.api.scores)
+            .then(res => {
+                console.log('Top scores successfully retrieved!');
+                return res.json();
+            }).catch(err => {
+                console.error(`Error submitting score [${err}]`);
+                return [];
+            });
     }
 
     function update() {
@@ -419,9 +459,34 @@ class Player {
     width = 70;
     height= 79;
     deg   = 0;
+    name = "Unknown"
+
+    constructor(name) {
+        this.name = name;
+    }
 }
 
 // Utils
 function random(from, to) {
     return Math.floor(Math.random() * (to - from + 1)) + from;
+}
+
+function capitalise(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+async function generateName() {
+    const noun = await fetch(constants.api.adjective).then(
+        res => res.json().then(data => {
+            return capitalise(data[0]);
+        })
+    );
+
+    const adjective = await fetch(constants.api.noun).then(
+        res => res.json().then(data => {
+            return capitalise(data[0]);
+        })
+    );
+
+    return noun + adjective;
 }
