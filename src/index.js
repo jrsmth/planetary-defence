@@ -467,10 +467,6 @@ class Player {
 }
 
 // Utils
-function random(from, to) {
-    return Math.floor(Math.random() * (to - from + 1)) + from;
-}
-
 function capitalise(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -489,4 +485,8 @@ async function generateName() {
     );
 
     return noun + adjective;
+}
+
+function random(from, to) {
+    return Math.floor(Math.random() * (to - from + 1)) + from;
 }
