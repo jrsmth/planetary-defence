@@ -11,9 +11,15 @@
 # Releases
 <!-- @LatestFirst -->
 
-## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.4.0)
+## [0.4.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.4.0)
 [Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (??/??/????)
-- `#...`
+- `#17` Create Figma Designs
+- `#18` Create Space Background
+- `#19` Create START Screen
+- `#20` Create END Screen
+- `#21` Style Earth (with score-led animation)
+- `#22` Style Asteroids (with spin)
+- `#23` General Play Styling (crosshair, score count, etc)
 
 ## [0.3.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.3.0)
 [Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (26/02/2024)
