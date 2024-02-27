@@ -1,6 +1,6 @@
 # Changelog
 
-# Version History
+## Version History
 - `0.0.x` PDEF POC
 - `0.1.x` Collision
 - `0.2.x` End Game
@@ -8,7 +8,7 @@
 - `0.4.x` Styling
 - `0.5.x` Demo
 
-# Releases
+## Releases
 <!-- @LatestFirst -->
 
 ## [0.4.0](https://github.com/jrsmth/planetary-defence/releases/tag/0.4.0)

@@ -53,17 +53,16 @@ function game() {
             player.name = await generateName();
 
         } else if (!gameOver) {
-            // Clear canvas
             context.clearRect(0, 0, width, height);
             context.beginPath();
 
-            // Init player
-            initPlanet();
-            initPlayer();
-
-            // Init opposition
             if (playing) {
+                context.shadowColor="";
+                context.shadowBlur=0;
+
                 initAsteroids();
+                initPlanet();
+                initPlayer();
 
                 context.font = "20px Verdana";
                 context.fillStyle = "white";
@@ -80,7 +79,14 @@ function game() {
                 context.fillText('' + score + '', width * .5, height * .5);
 
             } else {
-                context.drawImage(sprite, 428, 12, 70, 70, width * .5 - 35, height * .5 - 35, 70,70);
+                context.font = "24px Verdana";
+                context.fillStyle = "#ACF762";
+                context.textAlign = "center";
+                context.letterSpacing = "3px";
+                context.shadowColor="#ACF762";
+                context.shadowBlur=3;
+                context.fillText('START', width * .5, height * .5);
+
             }
 
         } else if (count < 1) {
@@ -228,6 +234,8 @@ function game() {
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
                         canvas.style.cursor = "default";
+
+                        // playing    = true; // Note :: beam...
 
                     } else {
                         canvas.style.cursor = "pointer";
@@ -384,7 +392,7 @@ function game() {
 
 }
 
-// Model
+/** Model */
 class Asteroid {
 
     coordsX = 0;
@@ -466,7 +474,7 @@ class Player {
     }
 }
 
-// Utils
+/** Utils */
 function capitalise(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
