@@ -7,8 +7,13 @@ const constants = {
         noun: "https://random-word-form.herokuapp.com/random/noun",
         scores: "https://planetary-defence-scores.onrender.com/scores"
     },
+    colour: {
+        blue: "#48DEE5",
+        green: "#ACF762",
+        orange: "#F4C316"
+    },
     src: {
-        earth: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
+        sprite: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
         explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png"
     }
 }
@@ -21,7 +26,7 @@ function game() {
     const context = canvas.getContext('2d');
 
     const sprite = new Image();
-    sprite.src = constants.src.earth;
+    sprite.src = constants.src.sprite;
 
     const spriteExplosion = new Image();
     spriteExplosion.src = constants.src.explosion;
@@ -80,11 +85,11 @@ function game() {
 
             } else {
                 context.font = "24px Verdana";
-                context.fillStyle = "#ACF762";
+                context.fillStyle = constants.colour.green;
                 context.textAlign = "center";
                 context.letterSpacing = "3px";
-                context.shadowColor="#ACF762";
-                context.shadowBlur=3;
+                context.shadowColor = constants.colour.green;
+                context.shadowBlur = 3;
                 context.fillText('START', width * .5, height * .5);
 
             }
@@ -92,32 +97,53 @@ function game() {
         } else if (count < 1) {
             // Game Over
             count = 1;
-            context.fillStyle = 'rgba(0,0,0,0.75)';
-            context.rect(0,0, width, height);
-            context.fill();
+            context.clearRect(0, 0, width, height);
+            context.beginPath();
 
             context.font = "60px Verdana";
-            context.fillStyle = "white";
+            context.fillStyle = constants.colour.green;
             context.textAlign = "center";
-            context.fillText(`GAME OVER: ${player.name}`,width * .5,height * .5 - 150);
-
-            context.font = "20px Verdana";
-            context.fillStyle = "white";
-            context.textAlign = "center";
-            context.fillText(`Score: ${score}`, width * .5,height * .5 + 140);
-
-            context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5 + 40, 70,70);
-
-            canvas.removeAttribute('class');
+            context.shadowColor = constants.colour.green;
+            context.shadowBlur = 6;
+            context.fillText('HIGH SCORES',width * .5,height * .125);
+            // context.drawImage(sprite, 500, 18, 80, 80, width * .5 + 170, height * .125 - 32.5, 80,80);
 
             await submit(score, player.name);
 
             const scores = await topScores();
 
-            for (let i = 0; i < scores.length; i++) {
-                context.fillText('#' + i + 1 + ': ' + scores[i].score,width * .5,height * .5 + 220 + (i * 20));
-                context.fillText('#' + i + 1 + ': ' + scores[i].score,width * .5,height * .5 + 220 + (i * 20));
+            context.font = "36px Verdana";
+            context.shadowBlur = 4;
+            context.textAlign = "center";
+            // context.fillText('HIGH SCORES', width * .5,height * .475);
+
+            for (let i = 0; i < 3; i++) {
+                const position = i + 1;
+                const record = scores[i];
+                const date = new Date(record.timestamp).toLocaleDateString('en-UK');
+
+                context.font = "32px Verdana";
+                context.fillText(record.score,width * .5,height * .25 + (i * 100));
+
+                context.font = "16px Verdana";
+                context.fillText(position + '. ' + record.name + ' (' + date + ')',width * .5,height * .25 + 40 + (i * 100));
             }
+
+
+            context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5, 70,70);
+
+            canvas.removeAttribute('class');
+
+            context.font = "96px Verdana";
+            context.fillStyle = constants.colour.blue;
+            context.shadowColor = constants.colour.blue;
+            context.shadowBlur = 6;
+            context.textAlign = "center";
+            context.fillText(score, width * .5,height * .75 - 55);
+
+            context.font = "24px Verdana";
+            context.fillText(player.name, width * .5,height * .75);
+
         }
     }
     
@@ -217,11 +243,9 @@ function game() {
         } else {
             const w = width * .5, h = height * .5;
             const x = e.offsetX, y = e.offsetY;
-            let distance;
+            const distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
 
             if (gameOver) {
-                distance = Math.sqrt(((x - w) * (x - w)) + ((y - (h + 45 + 22)) * (y - (h + 45 + 22))));
-
                 if (distance < 27) {
                     if (e.type === 'click') {
                         gameOver   = false;
@@ -244,8 +268,6 @@ function game() {
                     canvas.style.cursor = "default";
                 }
             } else {
-                distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
-
                 if (distance < 27) {
                     if (e.type === 'click') {
                         playing = true;
