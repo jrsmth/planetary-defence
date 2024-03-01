@@ -8,9 +8,10 @@ const constants = {
         scores: "https://planetary-defence-scores.onrender.com/scores"
     },
     colour: {
-        blue: "#48DEE5",
-        green: "#ACF762",
-        orange: "#F4C316"
+        blue: "#48dee5",
+        green: "#acf762",
+        orange: "#f4c316",
+        white: "#fff"
     },
     src: {
         sprite: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
@@ -112,25 +113,20 @@ function game() {
 
             const scores = await topScores();
 
-            context.font = "36px Verdana";
-            context.shadowBlur = 4;
-            context.textAlign = "center";
-            // context.fillText('HIGH SCORES', width * .5,height * .475);
-
             for (let i = 0; i < 3; i++) {
                 const position = i + 1;
                 const record = scores[i];
                 const date = new Date(record.timestamp).toLocaleDateString('en-UK');
 
-                context.font = "32px Verdana";
-                context.fillText(record.score,width * .5,height * .25 + (i * 100));
+                context.font = "24px Verdana";
+                context.fillText(record.score,width * .5,height * .225 + (i * 85));
 
                 context.font = "16px Verdana";
-                context.fillText(position + '. ' + record.name + ' (' + date + ')',width * .5,height * .25 + 40 + (i * 100));
+                context.fillText(position + '. ' + record.name + ' (' + date + ')',width * .5,height * .225 + 30 + (i * 85));
             }
 
-
-            context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .5, 70,70);
+            context.shadowColor = constants.colour.white;
+            context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .575, 70,70);
 
             canvas.removeAttribute('class');
 
@@ -139,10 +135,10 @@ function game() {
             context.shadowColor = constants.colour.blue;
             context.shadowBlur = 6;
             context.textAlign = "center";
-            context.fillText(score, width * .5,height * .75 - 55);
+            context.fillText(score, width * .5,height * .85 - 55);
 
             context.font = "24px Verdana";
-            context.fillText(player.name, width * .5,height * .75);
+            context.fillText(player.name, width * .5,height * .85);
 
         }
     }
@@ -241,11 +237,12 @@ function game() {
             bullets.push(new Bullet(e, height, width));
 
         } else {
-            const w = width * .5, h = height * .5;
             const x = e.offsetX, y = e.offsetY;
-            const distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
 
             if (gameOver) {
+                const w = width * .5, h = height * .575;
+                const distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
+
                 if (distance < 27) {
                     if (e.type === 'click') {
                         gameOver   = false;
@@ -268,6 +265,9 @@ function game() {
                     canvas.style.cursor = "default";
                 }
             } else {
+                const w = width * .5, h = height * .5;
+                const distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
+
                 if (distance < 27) {
                     if (e.type === 'click') {
                         playing = true;
