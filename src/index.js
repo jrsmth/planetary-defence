@@ -1,11 +1,13 @@
 
 window.addEventListener('DOMContentLoaded', game);
 
+const server = 'https://planetary-defence-scores.onrender.com';
+
 const constants = {
     api: {
         adjective: "https://random-word-form.herokuapp.com/random/adjective",
         noun: "https://random-word-form.herokuapp.com/random/noun",
-        scores: "https://planetary-defence-scores.onrender.com/scores"
+        scores: `${server}/scores`
     },
     colour: {
         blue: "#48dee5",
@@ -14,7 +16,12 @@ const constants = {
         white: "#fff"
     },
     src: {
-        sprite: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
+        earth: [
+            `${server}/res/earth-0.png`,
+            `${server}/res/earth-1.png`,
+            `${server}/res/earth-2.png`,
+            `${server}/res/earth-3.png`
+        ],
         explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png"
     }
 }
@@ -27,7 +34,7 @@ function game() {
     const context = canvas.getContext('2d');
 
     const sprite = new Image();
-    sprite.src = constants.src.sprite;
+    sprite.src = constants.src.earth[0];
 
     const spriteExplosion = new Image();
     spriteExplosion.src = constants.src.explosion;
