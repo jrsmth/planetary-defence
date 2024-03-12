@@ -22,7 +22,8 @@ const constants = {
             `${server}/res/earth-2.png`,
             `${server}/res/earth-3.png`
         ],
-        explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png"
+        explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png",
+        sprite: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png"
     }
 }
 
@@ -34,14 +35,16 @@ function game() {
     const context = canvas.getContext('2d');
 
     const sprite = new Image();
-    sprite.src = constants.src.earth[0];
+    sprite.src = constants.src.sprite;
+
+    const earth = new Image();
 
     const spriteExplosion = new Image();
     spriteExplosion.src = constants.src.explosion;
 
     let asteroids = [];
     let bullets = [];
-    let explosions = [];
+    let explosions = []; // Remove?
 
     let height = (context.canvas.height = window.innerHeight);
     let width = (context.canvas.width  = window.innerWidth);
@@ -71,7 +74,7 @@ function game() {
 
             if (playing) {
                 context.shadowColor="";
-                context.shadowBlur=0;
+                context.shadowBlur = 0;
 
                 initAsteroids();
                 initPlanet();
@@ -82,14 +85,6 @@ function game() {
                 context.textBaseline = 'middle';
                 context.textAlign = "left";
                 context.fillText('Score: ' + score + '', 20, 30);
-
-                context.font = "40px Verdana";
-                context.fillStyle = "white";
-                context.strokeStyle = "black";
-                context.textAlign = "center";
-                context.textBaseline = 'middle';
-                context.strokeText('' + score + '', width * .5, height * .5);
-                context.fillText('' + score + '', width * .5, height * .5);
 
             } else {
                 context.font = "24px Verdana";
@@ -114,7 +109,6 @@ function game() {
             context.shadowColor = constants.colour.green;
             context.shadowBlur = 6;
             context.fillText('HIGH SCORES',width * .5,height * .125);
-            // context.drawImage(sprite, 500, 18, 80, 80, width * .5 + 170, height * .125 - 32.5, 80,80);
 
             await submit(score, player.name);
 
@@ -199,19 +193,23 @@ function game() {
 
     function initPlanet() {
         context.save();
-        context.shadowBlur    = 100;
+        context.translate(width * .5, height * .5);
+        context.shadowBlur    = 10;
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
-        context.shadowColor   = "#999";
-        context.fillStyle     = '#fff';
+        context.shadowColor   = constants.colour.blue;
 
-        context.arc(width * .5, height * .5, 100, 0, Math.PI * 2);
-        context.fill();
+        if (score >= 300) {
+            earth.src = constants.src.earth[3];
+        } else if (score >= 150) {
+            earth.src = constants.src.earth[2];
+        } else if (score >= 50) {
+            earth.src = constants.src.earth[1];
+        } else {
+            earth.src = constants.src.earth[0];
+        }
 
-        context.translate(width * .5, height * .5);
-        context.rotate((planet_deg += 0.1) * (Math.PI / 180));
-
-        context.drawImage(sprite, 0, 0, 200, 200, -100, -100, 200,200);
+        context.drawImage(earth, -100, -100, 200, 200);
         context.restore();
     }
 
