@@ -16,6 +16,12 @@ const constants = {
         white: "#fff"
     },
     src: {
+        asteroid: [
+            `${server}/res/asteroid-0.png`,
+            `${server}/res/asteroid-1.png`,
+            `${server}/res/asteroid-2.png`,
+            `${server}/res/asteroid-3.png`
+        ],
         earth: [
             `${server}/res/earth-0.png`,
             `${server}/res/earth-1.png`,
@@ -28,8 +34,7 @@ const constants = {
 }
 
 function game() {
-
-    let player = new Player();
+    const player = new Player();
 
     const canvas = document.getElementsByTagName('canvas')[0];
     const context = canvas.getContext('2d');
@@ -147,42 +152,38 @@ function game() {
     function initAsteroids() {
         let distance;
 
-        for (let i = 0; i < asteroids.length; i++) {
-            if (!asteroids[i].destroyed) {
+        for (const asteroid of asteroids) {
+            if (!asteroid.destroyed) {
                 context.save();
-                context.translate(asteroids[i].coordsX, asteroids[i].coordsY);
-                context.rotate(asteroids[i].deg);
+                context.translate(asteroid.coordsX, asteroid.coordsY);
+                context.rotate(asteroid.deg);
 
                 context.drawImage(
-                    sprite,
-                    asteroids[i].x,
-                    asteroids[i].y,
-                    asteroids[i].width,
-                    asteroids[i].height,
-                    -(asteroids[i].width / asteroids[i].size) / 2,
-                    asteroids[i].moveY += 1/(asteroids[i].size),
-                    asteroids[i].width / asteroids[i].size,
-                    asteroids[i].height / asteroids[i].size
+                    asteroid.image,
+                    -(asteroid.width / asteroid.size) / 2,
+                    asteroid.moveY += 1/(asteroid.size),
+                    asteroid.width / asteroid.size,
+                    asteroid.height / asteroid.size
                 );
 
                 context.restore();
 
                 // Real Coords
-                asteroids[i].realX = (0) - (asteroids[i].moveY + ((asteroids[i].height / asteroids[i].size)/2)) * Math.sin(asteroids[i].deg);
-                asteroids[i].realY = (0) + (asteroids[i].moveY + ((asteroids[i].height / asteroids[i].size)/2)) * Math.cos(asteroids[i].deg);
+                asteroid.realX = (0) - (asteroid.moveY + ((asteroid.height / asteroid.size)/2)) * Math.sin(asteroid.deg);
+                asteroid.realY = (0) + (asteroid.moveY + ((asteroid.height / asteroid.size)/2)) * Math.cos(asteroid.deg);
 
-                asteroids[i].realX += asteroids[i].coordsX;
-                asteroids[i].realY += asteroids[i].coordsY;
+                asteroid.realX += asteroid.coordsX;
+                asteroid.realY += asteroid.coordsY;
 
                 // Game Over
-                distance = Math.sqrt(Math.pow(asteroids[i].realX -  (width * .5), 2) + Math.pow(asteroids[i].realY - (height * .5), 2));
-                if (distance < (((asteroids[i].width/asteroids[i].size) / 2) - 4) + 100) {
+                distance = Math.sqrt(Math.pow(asteroid.realX -  (width * .5), 2) + Math.pow(asteroid.realY - (height * .5), 2));
+                if (distance < (((asteroid.width/asteroid.size) / 2) - 4) + 100) {
                     gameOver = true;
                     playing  = false;
                     canvas.addEventListener('mousemove', action);
                 }
-            } else if (!asteroids[i].extinct) {
-                explode(asteroids[i]);
+            } else if (!asteroid.extinct) {
+                explode(asteroid);
             }
         }
 
@@ -434,11 +435,14 @@ class Asteroid {
     width = 134;
     height = 123;
     moveY = 0;
-    size = random(1, 3);
+    type = 0;
+    image = new Image();
+    size = random(2, 4);
     destroyed = false;
 
     constructor(width, height) {
-        const type = random(1,4);
+        const type = random(0,3);
+        this.image.src = constants.src.asteroid[type];
 
         switch(type){
             case 1:
