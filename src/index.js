@@ -22,6 +22,7 @@ const constants = {
             `${server}/res/asteroid-2.png`,
             `${server}/res/asteroid-3.png`
         ],
+        crosshair: `${server}/res/crosshair.cur`,
         earth: [
             `${server}/res/earth-0.png`,
             `${server}/res/earth-1.png`,
@@ -241,6 +242,7 @@ function game() {
 
         if (playing) {
             bullets.push(new Bullet(e, height, width));
+            canvas.style.cursor = `url("${constants.src.crosshair}") 0 100, auto`; // FixMe...
 
         } else {
             const x = e.offsetX, y = e.offsetY;
@@ -439,25 +441,26 @@ class Asteroid {
     image = new Image();
     size = random(2, 4);
     destroyed = false;
+    rot = 0;
 
     constructor(width, height) {
         const type = random(0,3);
         this.image.src = constants.src.asteroid[type];
 
         switch(type){
-            case 1:
+            case 0:
                 this.coordsX = random(0, width);
                 this.coordsY = 0 - 150;
                 break;
-            case 2:
+            case 1:
                 this.coordsX = width + 150;
                 this.coordsY = random(0, height);
                 break;
-            case 3:
+            case 2:
                 this.coordsX = random(0, width);
                 this.coordsY = height + 150;
                 break;
-            case 4:
+            case 3:
                 this.coordsX = 0 - 150;
                 this.coordsY = random(0, height);
                 break;

@@ -53,8 +53,3 @@ canvas {
     height: 100%;
     background-size: cover;
 }
-
-canvas.playing {
-    cursor: url('https://marclopezavila.github.io/planet-defense-game/img/aim_red.png') 17.5 17.5, auto !important;
-    /* FixMe */
-}

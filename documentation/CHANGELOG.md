@@ -18,7 +18,7 @@
 - `#19` Create START Screen
 - `#20` Create END Screen
 - `#21` Style Earth (with score-led animation)
-- `#22` Style Asteroids (with spin)
+- `#22` Style Asteroids
 - `#23` General Play Styling (crosshair, score count, etc)
 
 ## [0.3.0]
