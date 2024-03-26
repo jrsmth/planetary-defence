@@ -22,7 +22,7 @@ const constants = {
             `${server}/res/asteroid-2.png`,
             `${server}/res/asteroid-3.png`
         ],
-        crosshair: `${server}/res/crosshair.cur`,
+        cannon: `${server}/res/cannon.png`,
         earth: [
             `${server}/res/earth-0.png`,
             `${server}/res/earth-1.png`,
@@ -218,10 +218,9 @@ function game() {
     function initPlayer() {
         context.save();
         context.translate(width * .5, height * .5);
-
         context.rotate(player.deg);
         context.drawImage(
-            sprite,
+            player.image,
             200,
             0,
             player.width,
@@ -242,7 +241,6 @@ function game() {
 
         if (playing) {
             bullets.push(new Bullet(e, height, width));
-            canvas.style.cursor = `url("${constants.src.crosshair}") 0 100, auto`; // FixMe...
 
         } else {
             const x = e.offsetX, y = e.offsetY;
@@ -496,15 +494,17 @@ class Bullet {
 }
 
 class Player {
-    posX  = -35;
-    posY  = -182;
-    width = 70;
-    height= 79;
+    image = new Image();
+    posX  = -50;
+    posY  = -200;
+    width = 150;
+    height= 75;
     deg   = 0;
     name = "Unknown"
 
     constructor(name) {
         this.name = name;
+        this.image.src = constants.src.cannon;
     }
 }
 
