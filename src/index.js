@@ -13,6 +13,7 @@ const constants = {
         blue: "#48dee5",
         green: "#acf762",
         orange: "#f4c316",
+        yellow: "#fdfcc2",
         white: "#fff"
     },
     src: {
@@ -30,7 +31,8 @@ const constants = {
             `${server}/res/earth-3.png`
         ],
         explosion: "https://marclopezavila.github.io/planet-defense-game/img/explosion.png",
-        sprite: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png"
+        sprite: "https://marclopezavila.github.io/planet-defense-game/img/sprite.png",
+        projectile: `${server}/res/projectile.png`,
     }
 }
 
@@ -221,19 +223,15 @@ function game() {
         context.rotate(player.deg);
         context.drawImage(
             player.image,
-            200,
-            0,
             player.width,
             player.height,
             player.posX,
             player.posY,
-            player.width,
-            player.height
-        );
-
+        )
         context.restore();
 
-        if (bullets.length - score && playing) fire();
+        if (bullets.length - score && playing)
+            fire();
     }
 
     function action(e) {
@@ -346,15 +344,9 @@ function game() {
                 context.rotate(bullets[i].deg);
 
                 context.drawImage(
-                    sprite,
-                    211,
-                    100,
-                    50,
-                    75,
+                    bullets[i].image,
                     bullets[i].x,
-                    bullets[i].y -= 20,
-                    19,
-                    30
+                    bullets[i].y -= 10,
                 );
 
                 context.restore();
@@ -471,9 +463,10 @@ class Asteroid {
 }
 
 class Bullet {
+    image = new Image();
     event = {};
-    height = 0;
-    width = 0;
+    height = 20;
+    width = 20;
     realX = 0;
     realY = 0;
     deg = 0;
@@ -490,15 +483,16 @@ class Bullet {
         this.realX = event.offsetX;
         this.realY = event.offsetY;
         this.deg = Math.atan2(event.offsetX - (width * .5), -(event.offsetY - (height * .5)));
+        this.image.src = constants.src.projectile;
     }
 }
 
 class Player {
     image = new Image();
-    posX  = -50;
-    posY  = -200;
-    width = 150;
-    height= 75;
+    posX  = -200;
+    posY  = -80;
+    width = 40;
+    height= 40;
     deg   = 0;
     name = "Unknown"
 
