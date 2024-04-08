@@ -11,6 +11,7 @@ const constants = {
     },
     colour: {
         blue: "#48dee5",
+        brown: "#818071",
         green: "#acf762",
         orange: "#f4c316",
         yellow: "#fdfcc2",
@@ -62,6 +63,7 @@ function game() {
     let firstLoad = true;
     let score = 0;
     let count = 0;
+    let shots = 0;
 
     canvas.addEventListener('click', action);
     canvas.addEventListener('mousemove', action);
@@ -93,6 +95,10 @@ function game() {
                 context.textBaseline = 'middle';
                 context.textAlign = "left";
                 context.fillText('Score: ' + score + '', 20, 30);
+
+                const accuracy = (score === 0 ? 0 : score / shots).toLocaleString("en", {style: "percent"});
+                context.fillText('Accuracy: ' + accuracy, 20, 60);
+
 
             } else {
                 context.font = "24px Verdana";
@@ -161,6 +167,11 @@ function game() {
                 context.translate(asteroid.coordsX, asteroid.coordsY);
                 context.rotate(asteroid.deg);
 
+                context.shadowBlur    = 10;
+                context.shadowOffsetX = 0;
+                context.shadowOffsetY = 0;
+                context.shadowColor   = constants.colour.brown;
+
                 context.drawImage(
                     asteroid.image,
                     -(asteroid.width / asteroid.size) / 2,
@@ -198,7 +209,7 @@ function game() {
     function initPlanet() {
         context.save();
         context.translate(width * .5, height * .5);
-        context.shadowBlur    = 10;
+        context.shadowBlur    = 20;
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
         context.shadowColor   = constants.colour.blue;
@@ -238,6 +249,7 @@ function game() {
         e.preventDefault();
 
         if (playing) {
+            shots++;
             bullets.push(new Bullet(e, height, width));
 
         } else {

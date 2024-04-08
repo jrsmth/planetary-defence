@@ -20,6 +20,7 @@
 - `#21` Style Earth (with score-led animation)
 - `#22` Style Asteroids
 - `#23` General Play Styling (crosshair, score count, etc)
+- `#24` Update planet animation to use separate faces (to prevent flash)
 
 ## [0.3.0]
 [Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (26/02/2024)
