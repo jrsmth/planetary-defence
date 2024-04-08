@@ -223,10 +223,10 @@ function game() {
         context.rotate(player.deg);
         context.drawImage(
             player.image,
-            player.width,
-            player.height,
             player.posX,
             player.posY,
+            player.width,
+            player.height,
         )
         context.restore();
 
@@ -472,7 +472,7 @@ class Bullet {
     deg = 0;
 
     x = -8;
-    y = -179;
+    y = -180;
     destroyed= false;
 
     constructor(event, height, width) {
@@ -489,10 +489,10 @@ class Bullet {
 
 class Player {
     image = new Image();
-    posX  = -200;
-    posY  = -80;
-    width = 40;
-    height= 40;
+    posX  = -25;
+    posY  = -130;
+    width = 50;
+    height= 25;
     deg   = 0;
     name = "Unknown"
 
