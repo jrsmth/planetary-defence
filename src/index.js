@@ -90,14 +90,29 @@ function game() {
                 initPlanet();
                 initPlayer();
 
-                context.font = "20px Verdana";
-                context.fillStyle = "white";
+                context.fillStyle = constants.colour.blue;
                 context.textBaseline = 'middle';
                 context.textAlign = "left";
-                context.fillText('Score: ' + score + '', 20, 30);
 
-                const accuracy = (score === 0 ? 0 : score / shots).toLocaleString("en", {style: "percent"});
-                context.fillText('Accuracy: ' + accuracy, 20, 60);
+                // Score
+                context.font = "48px Verdana";
+                context.fillText(score, 30, 50);
+                context.font = "10px Verdana";
+                context.fillText('HITS', 30, 80);
+
+                // Accuracy
+                const accuracy = (score === 0 ? 0 : Math.round((100 * score) / shots))
+                context.font = "48px Verdana";
+                context.fillText(accuracy, 30, 140);
+                context.font = "10px Verdana";
+                context.fillText('ACCURACY %', 30, 170);
+
+                // Points
+                const points = score === 0 ? 0 : Math.round(10 * score * (score / shots));
+                context.font = "48px Verdana";
+                context.fillText(points, 30, 230);
+                context.font = "10px Verdana";
+                context.fillText('POINTS', 30, 260);
 
 
             } else {
@@ -167,11 +182,6 @@ function game() {
                 context.translate(asteroid.coordsX, asteroid.coordsY);
                 context.rotate(asteroid.deg);
 
-                context.shadowBlur    = 10;
-                context.shadowOffsetX = 0;
-                context.shadowOffsetY = 0;
-                context.shadowColor   = constants.colour.brown;
-
                 context.drawImage(
                     asteroid.image,
                     -(asteroid.width / asteroid.size) / 2,
@@ -209,7 +219,7 @@ function game() {
     function initPlanet() {
         context.save();
         context.translate(width * .5, height * .5);
-        context.shadowBlur    = 20;
+        context.shadowBlur    = 10;
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
         context.shadowColor   = constants.colour.blue;
@@ -484,7 +494,7 @@ class Bullet {
     deg = 0;
 
     x = -8;
-    y = -180;
+    y = -178;
     destroyed= false;
 
     constructor(event, height, width) {
