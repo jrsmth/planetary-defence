@@ -58,8 +58,8 @@ function game() {
     let height = (context.canvas.height = window.innerHeight);
     let width = (context.canvas.width  = window.innerWidth);
     let planet_deg= 0;
-    let gameOver = false;
-    let playing = false;
+    let gameOver  = true;
+    let playing   = false;
     let firstLoad = true;
     let score = 0;
     let count = 0;
@@ -83,8 +83,8 @@ function game() {
             context.beginPath();
 
             if (playing) {
-                context.shadowColor="";
-                context.shadowBlur = 0;
+                context.shadowColor = "";
+                context.shadowBlur  = 0;
 
                 initAsteroids();
                 initPlanet();
@@ -94,25 +94,31 @@ function game() {
                 context.textBaseline = 'middle';
                 context.textAlign = "left";
 
+                // Name
+                context.font = "12px Verdana";
+                context.letterSpacing = "2px";
+                context.fillText(player.name, 30, 50);
+
                 // Score
+                context.shadowBlur = 0;
                 context.font = "48px Verdana";
-                context.fillText(score, 30, 50);
+                context.fillText(score, 30, 120);
                 context.font = "10px Verdana";
-                context.fillText('HITS', 30, 80);
+                context.fillText('HITS', 30, 150);
 
                 // Accuracy
                 const accuracy = Math.round((100 * score) / shots) // FixMe :: NaN, async the calculations, redo GIF?
                 context.font = "48px Verdana";
-                context.fillText(accuracy, 30, 140);
+                context.fillText(accuracy, 30, 210);
                 context.font = "10px Verdana";
-                context.fillText('ACCURACY %', 30, 170);
+                context.fillText('ACCURACY %', 30, 240);
 
                 // Points
                 const points = accuracy * score;
                 context.font = "48px Verdana";
-                context.fillText(points, 30, 230);
+                context.fillText(points, 30, 300);
                 context.font = "10px Verdana";
-                context.fillText('POINTS', 30, 260);
+                context.fillText('POINTS', 30, 330);
 
 
             } else {
@@ -123,7 +129,6 @@ function game() {
                 context.shadowColor = constants.colour.green;
                 context.shadowBlur = 3;
                 context.fillText('START', width * .5, height * .5);
-
             }
 
         } else if (count < 1) {
@@ -132,43 +137,41 @@ function game() {
             context.clearRect(0, 0, width, height);
             context.beginPath();
 
+            context.letterSpacing = "0px";
             context.font = "60px Verdana";
             context.fillStyle = constants.colour.green;
             context.textAlign = "center";
-            context.shadowColor = constants.colour.green;
-            context.shadowBlur = 6;
-            context.fillText('HIGH SCORES',width * .5,height * .125);
+            context.fillText('HIGH SCORES',width * .4,height * .15);
 
             await submit(score, player.name);
 
             const scores = await topScores();
 
-            for (let i = 0; i < 3; i++) {
+            context.textAlign = "left";
+            for (let i = 0; i < 10; i++) {
                 const position = i + 1;
                 const record = scores[i];
                 const date = new Date(record.timestamp).toLocaleDateString('en-UK');
 
-                context.font = "24px Verdana";
-                context.fillText(record.score,width * .5,height * .225 + (i * 85));
+                context.font = `${28 - i}px Verdana`;
+                context.fillText(record.score,width * .4 + 130,height * .25 + (i * 50));
 
-                context.font = "16px Verdana";
-                context.fillText(position + '. ' + record.name + ' (' + date + ')',width * .5,height * .225 + 30 + (i * 85));
+                context.font = `${18 - i}px Verdana`;
+                context.fillText(`${position}. ${record.name} (${date})`,width * .4 - 200,height * .25 + (i * 50));
             }
 
             context.shadowColor = constants.colour.white;
-            context.drawImage(sprite, 500, 18, 70, 70, width * .5 - 35, height * .575, 70,70);
+            context.drawImage(sprite, 500, 18, 70, 70, width * .7 - 35, height * .55, 70,70);
 
             canvas.removeAttribute('class');
 
             context.font = "96px Verdana";
             context.fillStyle = constants.colour.blue;
-            context.shadowColor = constants.colour.blue;
-            context.shadowBlur = 6;
             context.textAlign = "center";
-            context.fillText(score, width * .5,height * .85 - 55);
+            context.fillText(score, width * .7,height * .45 - 55);
 
             context.font = "24px Verdana";
-            context.fillText(player.name, width * .5,height * .85);
+            context.fillText(player.name, width * .7,height * .45);
 
         }
     }
