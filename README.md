@@ -11,4 +11,4 @@
 <a href=""><img src="https://img.shields.io/badge/github%20pages-121013?&logo=github&logoColor=white"></a>
 <a href=""><img src="https://img.shields.io/badge/markdown-%23121013.svg?&logo=markdown&logoColor=orange" ></a>
 
-<img src="https://github.com/jrsmth/planetary-defence/assets/34093915/901205d8-0304-42bf-816e-e272b7b12f3a"></a>
+<img src="https://github.com/jrsmth/planetary-defence/assets/34093915/ea96848e-be4b-4e2d-8a5a-618887a61770"></a>

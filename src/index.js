@@ -63,7 +63,7 @@ function game() {
     let firstLoad = true;
     let score = 0;
     let count = 0;
-    let shots = 0;
+    let shots = -1;
 
     canvas.addEventListener('click', action);
     canvas.addEventListener('mousemove', action);
@@ -101,14 +101,14 @@ function game() {
                 context.fillText('HITS', 30, 80);
 
                 // Accuracy
-                const accuracy = (score === 0 ? 0 : Math.round((100 * score) / shots))
+                const accuracy = Math.round((100 * score) / shots) // FixMe :: NaN, async the calculations, redo GIF?
                 context.font = "48px Verdana";
                 context.fillText(accuracy, 30, 140);
                 context.font = "10px Verdana";
                 context.fillText('ACCURACY %', 30, 170);
 
                 // Points
-                const points = score === 0 ? 0 : Math.round(10 * score * (score / shots));
+                const points = accuracy * score;
                 context.font = "48px Verdana";
                 context.fillText(points, 30, 230);
                 context.font = "10px Verdana";
@@ -259,6 +259,8 @@ function game() {
         e.preventDefault();
 
         if (playing) {
+            if (shots === -1) shots++
+
             shots++;
             bullets.push(new Bullet(e, height, width));
 
@@ -276,7 +278,8 @@ function game() {
                         bullets    = [];
                         asteroids  = [];
                         explosions = [];
-                        score  = 0;
+                        score = 0;
+                        shots = -1;
                         player.deg = 0;
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
