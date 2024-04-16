@@ -134,36 +134,38 @@ function game() {
         } else if (count < 1) {
             // Game Over
             count = 1;
-            context.clearRect(0, 0, width, height);
+            // context.clearRect(0, 0, width, height);
             context.beginPath();
 
             context.letterSpacing = "0px";
-            context.font = "60px Verdana";
-            context.fillStyle = constants.colour.green;
             context.textAlign = "center";
-            context.fillText('HIGH SCORES',width * .4,height * .15);
+            context.fillStyle = constants.colour.green;
+
+            context.font = "48px Verdana";
+            context.fillText('\u21BA',width * .5,height * .475);
 
             await submit(score, player.name);
 
             const scores = await topScores();
 
+            context.textBaseline = 'left';
             context.textAlign = "left";
-            for (let i = 0; i < 10; i++) {
+            context.fillStyle = constants.colour.orange;
+            context.font = "12px Verdana";
+            context.letterSpacing = "2px";
+            context.fillText('High Scores', 30,390);
+
+            context.letterSpacing = "1px";
+            for (let i = 0; i < 5; i++) {
                 const position = i + 1;
                 const record = scores[i];
                 const date = new Date(record.timestamp).toLocaleDateString('en-UK');
+                context.font = '10px Verdana';
+                context.fillText(`${position}. ${record.name}, ${date}`,30,440 + (i * 50));
+                context.font = '16px Verdana';
+                context.fillText(record.score,300,440 + (i * 50));
 
-                context.font = `${28 - i}px Verdana`;
-                context.fillText(record.score,width * .4 + 130,height * .25 + (i * 50));
-
-                context.font = `${18 - i}px Verdana`;
-                context.fillText(`${position}. ${record.name} (${date})`,width * .4 - 200,height * .25 + (i * 50));
             }
-
-            context.shadowColor = constants.colour.white;
-            context.drawImage(sprite, 500, 18, 70, 70, width * .7 - 35, height * .55, 70,70);
-
-            canvas.removeAttribute('class');
 
             context.font = "96px Verdana";
             context.fillStyle = constants.colour.blue;
@@ -281,14 +283,14 @@ function game() {
                         bullets    = [];
                         asteroids  = [];
                         explosions = [];
-                        score = 0;
-                        shots = -1;
+                        score      = 0;
+                        shots      = -1;
                         player.deg = 0;
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
                         canvas.style.cursor = "default";
 
-                        // playing    = true; // Note :: beam...
+                        // playing    = true; // Note :: beam...?
 
                     } else {
                         canvas.style.cursor = "pointer";
@@ -530,7 +532,7 @@ class Player {
     }
 }
 
-/** Utils */
+/** Util */
 function capitalise(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
