@@ -237,7 +237,7 @@ function game() {
             earth.src = constants.src.earth[3];
         } else if (score >= 150) {
             earth.src = constants.src.earth[2];
-        } else if (score >= 5) {
+        } else if (score >= 50) {
             earth.src = constants.src.earth[1];
         } else {
             earth.src = constants.src.earth[0];
