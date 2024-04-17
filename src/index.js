@@ -58,7 +58,7 @@ function game() {
     let height = (context.canvas.height = window.innerHeight);
     let width = (context.canvas.width  = window.innerWidth);
     let planet_deg= 0;
-    let gameOver  = true;
+    let gameOver  = false;
     let playing   = false;
     let firstLoad = true;
     let score = 0;
@@ -107,7 +107,7 @@ function game() {
                 context.fillText('HITS', 30, 150);
 
                 // Accuracy
-                const accuracy = Math.round((100 * score) / shots) // FixMe :: NaN, async the calculations, redo GIF?
+                const accuracy = Math.round((100 * score) / shots)
                 context.font = "48px Verdana";
                 context.fillText(accuracy, 30, 210);
                 context.font = "10px Verdana";
@@ -134,26 +134,34 @@ function game() {
         } else if (count < 1) {
             // Game Over
             count = 1;
-            // context.clearRect(0, 0, width, height);
             context.beginPath();
 
-            context.letterSpacing = "0px";
+            context.letterSpacing = "1px";
             context.textAlign = "center";
             context.fillStyle = constants.colour.green;
+            context.shadowBlur    = 4;
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 0;
+            context.shadowColor   = constants.colour.green;
+            context.font = "16px Verdana";
+            context.fillText('GAME OVER',width * .5, 50);
 
-            context.font = "48px Verdana";
-            context.fillText('\u21BA',width * .5,height * .475);
-
-            await submit(score, player.name);
-
+            const accuracy = Math.round((100 * score) / shots)
+            const points = accuracy * score;
+            await submit(points, player.name);
             const scores = await topScores();
 
-            context.textBaseline = 'left';
-            context.textAlign = "left";
+            context.font = "48px Verdana";
+            context.shadowBlur    = 2;
+            context.fillText('\u21BA',width * .5,height * .5 - 135);
+            context.shadowBlur    = 0;
+
+            context.textBaseline = 'right';
+            context.textAlign = "right";
             context.fillStyle = constants.colour.orange;
             context.font = "12px Verdana";
             context.letterSpacing = "2px";
-            context.fillText('High Scores', 30,390);
+            context.fillText('High Scores', width - 30,50);
 
             context.letterSpacing = "1px";
             for (let i = 0; i < 5; i++) {
@@ -161,20 +169,11 @@ function game() {
                 const record = scores[i];
                 const date = new Date(record.timestamp).toLocaleDateString('en-UK');
                 context.font = '10px Verdana';
-                context.fillText(`${position}. ${record.name}, ${date}`,30,440 + (i * 50));
+                context.fillText(`${position}. ${record.name}, ${date}`,width - 30,100 + (i * 50));
                 context.font = '16px Verdana';
-                context.fillText(record.score,300,440 + (i * 50));
+                context.fillText(record.score,width - 300,100 + (i * 50));
 
             }
-
-            context.font = "96px Verdana";
-            context.fillStyle = constants.colour.blue;
-            context.textAlign = "center";
-            context.fillText(score, width * .7,height * .45 - 55);
-
-            context.font = "24px Verdana";
-            context.fillText(player.name, width * .7,height * .45);
-
         }
     }
     
@@ -276,7 +275,7 @@ function game() {
                 const w = width * .5, h = height * .575;
                 const distance = Math.sqrt(((x - w) * (x - w)) + ((y - h) * (y - h)));
 
-                if (distance < 27) {
+                if (distance < 225) {
                     if (e.type === 'click') {
                         gameOver   = false;
                         count      = 0;
@@ -290,7 +289,13 @@ function game() {
                         canvas.removeEventListener('mousemove', move);
                         canvas.style.cursor = "default";
 
-                        // playing    = true; // Note :: beam...?
+                        playing = true;
+                        // Note :: take away this section for BEAM!!
+                        canvas.removeEventListener("mousemove", action);
+                        canvas.addEventListener('contextmenu', action);
+                        canvas.addEventListener('mousemove', move);
+                        canvas.setAttribute("class", "playing");
+                        canvas.style.cursor = "default";
 
                     } else {
                         canvas.style.cursor = "pointer";
