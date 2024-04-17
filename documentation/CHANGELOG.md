@@ -12,7 +12,7 @@
 <!-- @LatestFirst -->
 
 ## [0.4.0]
-[Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (18/04/2024)
+[Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (17/04/2024)
 - `#17` Create Figma Designs
 - `#18` Create Space Background
 - `#19` Create START Screen
@@ -21,7 +21,6 @@
 - `#22` Style Asteroids
 - `#23` General Play Styling (crosshair, score count, etc)
 - `#24` Update planet animation to use separate faces (to prevent flash)
-- `#25` Add a 'fainted' planet face for the end screen
 
 ## [0.3.0]
 [Global Scores](https://github.com/jrsmth/planetary-defence/milestone/4) (26/02/2024)

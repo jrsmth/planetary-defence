@@ -24,6 +24,7 @@ const constants = {
             `${server}/res/asteroid-2.png`,
             `${server}/res/asteroid-3.png`
         ],
+        base: `${server}/res/earth-base.png`,
         cannon: `${server}/res/cannon.png`,
         earth: [
             `${server}/res/earth-0.png`,
@@ -46,6 +47,7 @@ function game() {
     const sprite = new Image();
     sprite.src = constants.src.sprite;
 
+    const earthBase = new Image();
     const earth = new Image();
 
     const spriteExplosion = new Image();
@@ -228,17 +230,22 @@ function game() {
         context.shadowOffsetY = 0;
         context.shadowColor   = constants.colour.blue;
 
+        earthBase.src = constants.src.base;
+        context.drawImage(earthBase, -100, -100, 200, 200);
+
         if (score >= 300) {
             earth.src = constants.src.earth[3];
         } else if (score >= 150) {
             earth.src = constants.src.earth[2];
-        } else if (score >= 50) {
+        } else if (score >= 5) {
             earth.src = constants.src.earth[1];
         } else {
             earth.src = constants.src.earth[0];
         }
 
+        earthBase.src = constants.src.base;
         context.drawImage(earth, -100, -100, 200, 200);
+
         context.restore();
     }
 
