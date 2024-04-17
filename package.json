@@ -1,6 +1,6 @@
 {
   "name": "planetary-defence",
-  "version": "0.4.0-SNAPSHOT",
+  "version": "0.4.0",
   "description": "Planetary Defence 🌍💥🕹",
   "main": "src/index.js",
   "scripts": {
