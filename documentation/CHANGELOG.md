@@ -11,8 +11,8 @@
 ## Releases
 <!-- @LatestFirst -->
 
-## [0.4.1]
-[Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (18/04/2024)
+## [0.5.0]
+[Styling](https://github.com/jrsmth/planetary-defence/milestone/6) (19/04/2024)
 - `#25` Add a 'fainted' planet face for the end screen
 
 ## [0.4.0]
@@ -57,4 +57,4 @@
 [0.2.0]: https://github.com/jrsmth/planetary-defence/compare/0.1.0...0.2.0
 [0.3.0]: https://github.com/jrsmth/planetary-defence/compare/0.2.0...0.3.0
 [0.4.0]: https://github.com/jrsmth/planetary-defence/compare/0.3.0...0.4.0
-[0.4.1]: https://github.com/jrsmth/planetary-defence/compare/0.4.0...0.4.1
+[0.5.0]: https://github.com/jrsmth/planetary-defence/compare/0.4.0...0.5.0
