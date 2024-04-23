@@ -12,9 +12,9 @@
 <!-- @LatestFirst -->
 
 ## [0.5.0]
-[Demo](https://github.com/jrsmth/planetary-defence/milestone/6) (19/04/2024)
-- `#25` Add a 'fainted' planet face for the end screen
+[Demo](https://github.com/jrsmth/planetary-defence/milestone/6) (23/04/2024)
 - `#27` Offload JS logic that is unrelated to exercise to express server
+- `#28` Tidy up code for demo
 
 ## [0.4.0]
 [Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (17/04/2024)
