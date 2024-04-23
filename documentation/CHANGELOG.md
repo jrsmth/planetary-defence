@@ -11,6 +11,11 @@
 ## Releases
 <!-- @LatestFirst -->
 
+## [0.5.0]
+[Demo](https://github.com/jrsmth/planetary-defence/milestone/6) (23/04/2024)
+- `#27` Offload JS logic that is unrelated to exercise to express server
+- `#28` Tidy up code for demo
+
 ## [0.4.0]
 [Styling](https://github.com/jrsmth/planetary-defence/milestone/5) (17/04/2024)
 - `#17` Create Figma Designs
@@ -53,3 +58,4 @@
 [0.2.0]: https://github.com/jrsmth/planetary-defence/compare/0.1.0...0.2.0
 [0.3.0]: https://github.com/jrsmth/planetary-defence/compare/0.2.0...0.3.0
 [0.4.0]: https://github.com/jrsmth/planetary-defence/compare/0.3.0...0.4.0
+[0.5.0]: https://github.com/jrsmth/planetary-defence/compare/0.4.0...0.5.0
