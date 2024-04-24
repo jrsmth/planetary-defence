@@ -84,7 +84,7 @@
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/52a20fc6-bbcc-4227-b5fd-b4ef0cc93b6c">
 
-3. Save the file and refresh
+2. Save the file and refresh
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/b37eada0-15bc-47d0-9c78-81a87c03109a">
 
@@ -92,4 +92,18 @@
 
 ## Fix the Score (Part 5 of 5)
 
-## Stretch Yourself (*Optional Extra*)
+1. Increment the score by adding `score += 1;` on 'line 26'
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/b10e540f-aecc-47cc-97dd-76615d6d2197">
+
+2. Save the file and refresh
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/0f326158-0455-48d5-810b-8bf1e88f6029">
+
+3. Well done, now we can play the game as it was meant to be played! 🎉
+
+<br>
+
+## Stretch Yourself
+* What does `score++;` do?
+  * How about `score += someNumber;`?
