@@ -3,11 +3,8 @@
   "version": "0.5.1-SNAPSHOT",
   "description": "Planetary Defence 🌍💥🕹",
   "scripts": {
-    "serve": "cd src && live-server",
+    "stack": "npm i && cd src && live-server",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "stackblitz": {
-    "startCommand": "npm run serve"
   },
   "repository": {
     "type": "git",
