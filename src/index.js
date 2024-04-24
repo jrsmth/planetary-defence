@@ -16,7 +16,10 @@ function fire() {
             for (let j = 0; j < asteroids.length; j++) {
                 /** Collision Detection: */
                 /** We need to check if a bullet is touching any asteroids */
-
+                const someCondition = true;
+                if (someCondition === true) {
+                    // do something!
+                }
             }
         }
     }
