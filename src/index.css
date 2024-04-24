@@ -12,7 +12,11 @@ html {
 }
 
 body {
-    background-color: #211D49;
+    /* Sets the background colour for space: */
+    background-color: red;
+    /* This would look better as a dark blue! */
+
+
     width: 100%;
     min-height: 100vh;
 }
