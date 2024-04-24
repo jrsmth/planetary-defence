@@ -46,4 +46,19 @@
 
 <br>
 
-## Fix the X
+## Fix the Click
+*Ahh! Clicking is not working...*
+
+1. Open up `index.js` in the editor
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/d18e8b5b-9613-484d-8640-5b05c302954f">
+
+2. Remove 'line 5' (`startGame();`) and replace with `canvas.addEventListener('click', action);`
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/2ea188ea-b53d-460f-b390-dc8e4b51b932">
+
+3. Save the file and refresh
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/c3b81b69-14f9-4284-85d9-f181c3700eef">
+
+4. Now we can shoot the cannon 🎉
