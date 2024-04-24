@@ -1,7 +1,9 @@
 window.addEventListener('DOMContentLoaded', () => {
-    canvas.addEventListener('click', action);
-    canvas.addEventListener('mousemove', action);
     window.addEventListener("resize", update);
+
+    /** Start the game: */
+    startGame();
+    /** We need to register the ability to click on the screen! */
 
     init();
 });
