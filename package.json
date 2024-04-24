@@ -1,0 +1,23 @@
+{
+  "name": "planetary-defence",
+  "version": "0.5.1-SNAPSHOT",
+  "description": "Planetary Defence 🌍💥🕹",
+  "scripts": {
+    "serve": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrsmth/planetary-defence.git"
+  },
+  "author": "jrsmth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrsmth/planetary-defence/issues"
+  },
+  "homepage": "https://github.com/jrsmth/planetary-defence#readme",
+  "dependencies": {
+    "http-server": "^13.0.2",
+    "live-server": "^1.2.1"
+  }
+}
