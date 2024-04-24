@@ -66,6 +66,29 @@
 <br>
 
 ## Fix the Collision (Part 4 of 5)
+*Hold up! I'm sure I hit that asteroid...*
+
+1. Replace the `if ()` statement on 'lines 19-22' with the code block below
+
+```javascript
+    if (hasCollision(asteroids[j], bullets[i])) {
+        asteroids[j].destroyed = true;
+        bullets[i].destroyed   = true;
+        explosions.push(asteroids[j]);
+        
+        /** Add Scoring: */
+        /** That score isn't going to increase itself! */
+        
+    }
+```
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/52a20fc6-bbcc-4227-b5fd-b4ef0cc93b6c">
+
+3. Save the file and refresh
+
+<img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/b37eada0-15bc-47d0-9c78-81a87c03109a">
+
+3. We can now detect collisions 🎉
 
 ## Fix the Score (Part 5 of 5)
 
