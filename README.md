@@ -12,7 +12,7 @@
 
 <br>
 
-## Getting Started
+## Getting Started (Part 1 of 5)
 1. Go to [stackblitz](https://stackblitz.com/~/github.com/jrsmth/planetary-defence/tree/exercise?startScript=stack)
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/f13e982c-26bb-4256-b1b9-1e275f1dd9f5">
@@ -25,7 +25,7 @@
 
 <br>
 
-## Fix the Background
+## Fix the Background (Part 2 of 5)
 *Ouch! That's a little sore on the eyes...*
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/f16886f5-16f1-467f-b9f0-08ca28f9f0a2">
@@ -46,7 +46,7 @@
 
 <br>
 
-## Fix the Click
+## Fix the Click (Part 3 of 5)
 *Ahh! Clicking is not working...*
 
 1. Open up `index.js` in the editor
@@ -62,3 +62,11 @@
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/c3b81b69-14f9-4284-85d9-f181c3700eef">
 
 4. Now we can shoot the cannon 🎉
+
+<br>
+
+## Fix the Collision (Part 4 of 5)
+
+## Fix the Score (Part 5 of 5)
+
+## Stretch Yourself (*Optional Extra*)
