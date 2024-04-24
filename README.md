@@ -91,6 +91,7 @@
 3. We can now detect collisions 🎉
 
 ## Fix the Score (Part 5 of 5)
+*Hey... Where are my points?!*
 
 1. Increment the score by adding `score += 1;` on 'line 26'
 
