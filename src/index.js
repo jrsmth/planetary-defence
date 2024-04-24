@@ -8,6 +8,20 @@ window.addEventListener('DOMContentLoaded', () => {
     init();
 });
 
+function fire() {
+    for (let i = 0; i < bullets.length; i++) {
+        if (!bullets[i].destroyed) {
+            trace(i);
+
+            for (let j = 0; j < asteroids.length; j++) {
+                /** Collision Detection: */
+                /** We need to check if a bullet is touching any asteroids */
+
+            }
+        }
+    }
+}
+
 function action(e) {
     e.preventDefault();
 
@@ -20,22 +34,5 @@ function action(e) {
             handleStart(e);
         else
             canvas.style.cursor = "pointer";
-    }
-}
-
-function fire() {
-    for (let i = 0; i < bullets.length; i++) {
-        if (!bullets[i].destroyed) {
-            trace(i);
-
-            for (let j = 0; j < asteroids.length; j++) {
-                if (hasCollision(asteroids[j], bullets[i])) {
-                    score += 1;
-                    asteroids[j].destroyed = true;
-                    bullets[i].destroyed   = true;
-                    explosions.push(asteroids[j]);
-                }
-            }
-        }
     }
 }
