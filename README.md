@@ -11,7 +11,7 @@
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/1dd6a899-afc7-4887-b883-1fa4406cfe56">
 
-3. Select `Connect to Project` 🎉
+3. Selecting `Connect to Project` loads the game 🎉
 
 <br>
 
@@ -28,9 +28,11 @@
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/8a369a6c-c0bd-49ed-8f20-3b1b3cfab951">
 
-3. Save the file with `ctrl/cmd-s` and then refresh 🎉
+3. Save the file with `ctrl/cmd-s` and then refresh
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/d6792705-3a92-413d-9159-825441ed44ad">
+
+4. The background is now dark-blue 🎉
 
 <br>
 
