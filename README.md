@@ -90,6 +90,8 @@
 
 3. We can now detect collisions 🎉
 
+<br>
+
 ## Fix the Score (Part 5 of 5)
 *Hey... Where are my points?!*
 
