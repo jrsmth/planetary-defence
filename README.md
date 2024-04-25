@@ -30,11 +30,11 @@
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/f16886f5-16f1-467f-b9f0-08ca28f9f0a2">
 
-1. Open up `index.css` in the editor
+1. Open up `src/index.css` in the editor
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/dd1d45cc-e2d7-4798-9e4a-6661e1cb92c9">
 
-2. Update the `background-colour:` to use `#211D49` (blue)
+2. Update the `background-colour:` to use `#211D49` (dark-blue)
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/8a369a6c-c0bd-49ed-8f20-3b1b3cfab951">
 
@@ -49,7 +49,7 @@
 ## Fix the Click (Part 3 of 5)
 *Ahh! Clicking is not working...*
 
-1. Open up `index.js` in the editor
+1. Open up `src/index.js` in the editor
 
 <img width=800 src="https://github.com/jrsmth/planetary-defence/assets/34093915/d18e8b5b-9613-484d-8640-5b05c302954f">
 
@@ -109,4 +109,4 @@
 
 ## Stretch Yourself
 * What does `score++;` do?
-  * How about `score += someNumber;`?
+  * How about `score += 7;`?
